@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Loader2, Download, BarChart3 } from 'lucide-react';
+import { Loader as Loader2, Download, ChartBar as BarChart3 } from 'lucide-react';
 import {
   BarChart,
   Bar,
@@ -210,7 +210,7 @@ export default function RapportsPage() {
   if (loading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-rose-500" />
       </div>
     );
   }
@@ -219,8 +219,8 @@ export default function RapportsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 print:hidden">
         <div>
-          <h1 className="text-2xl font-bold text-white">Rapports</h1>
-          <p className="text-sm text-slate-400">
+          <h1 className="text-2xl font-bold text-slate-800">Rapports</h1>
+          <p className="text-sm text-slate-500">
             Rapport des commissions — du {range.start.split('-').reverse().join('/')} au {range.end.split('-').reverse().join('/')}
           </p>
         </div>
@@ -236,13 +236,13 @@ export default function RapportsPage() {
             type="date"
             value={refDate}
             onChange={(e) => setRefDate(e.target.value)}
-            className="w-40 bg-slate-900 border-slate-700 text-white"
+            className="w-40 bg-white border-pink-300 text-slate-800"
           />
-          <Button onClick={exportCSV} variant="outline" className="border-slate-700">
+          <Button onClick={exportCSV} variant="outline" className="border-pink-200">
             <Download className="h-4 w-4 mr-1" />
             Excel (CSV)
           </Button>
-          <Button onClick={exportPDF} variant="outline" className="border-slate-700">
+          <Button onClick={exportPDF} variant="outline" className="border-pink-200">
             <Download className="h-4 w-4 mr-1" />
             PDF
           </Button>
@@ -258,8 +258,8 @@ export default function RapportsPage() {
 
       <Card className="print:hidden">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <BarChart3 className="h-5 w-5 text-emerald-400" />
+          <CardTitle className="flex items-center gap-2 text-slate-800">
+            <BarChart3 className="h-5 w-5 text-rose-600" />
             Évolution des commissions
           </CardTitle>
           <CardDescription>Par jour sur la période sélectionnée.</CardDescription>
@@ -267,16 +267,16 @@ export default function RapportsPage() {
         <CardContent className="h-72">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={byDay}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis dataKey="jour" stroke="#64748b" fontSize={12} tickFormatter={(v: string) => v.slice(8) + '/' + v.slice(5, 7)} />
               <YAxis stroke="#64748b" fontSize={12} />
               <ChartTooltip
-                contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: 8, color: '#fff' }}
+                contentStyle={{ backgroundColor: '#fff', border: '1px solid #fbcfe8', borderRadius: 8, color: '#333' }}
                 formatter={(value) => formatFC(Number(value))}
               />
               <Legend />
-              <Line type="monotone" dataKey="boissonsCommission" name="Commission boissons" stroke="#10b981" strokeWidth={2} />
-              <Line type="monotone" dataKey="cremesCommission" name="Commission crèmes" stroke="#ec4899" strokeWidth={2} />
+              <Line type="monotone" dataKey="boissonsCommission" name="Commission boissons" stroke="#e11d48" strokeWidth={2} />
+              <Line type="monotone" dataKey="cremesCommission" name="Commission crèmes" stroke="#14b8a6" strokeWidth={2} />
               <Line type="monotone" dataKey="totalCommission" name="Total" stroke="#38bdf8" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
@@ -285,7 +285,7 @@ export default function RapportsPage() {
 
       <Card>
         <CardHeader className="print:hidden">
-          <CardTitle className="text-white">Détail journalier</CardTitle>
+          <CardTitle className="text-slate-800">Détail journalier</CardTitle>
           <CardDescription>Tableau utilisé pour l'export Excel et l'impression PDF.</CardDescription>
         </CardHeader>
         <CardContent className="overflow-x-auto">
@@ -325,7 +325,7 @@ export default function RapportsPage() {
                 </TableRow>
               )}
               {byDay.length > 0 && (
-                <TableRow className="border-t-2 border-slate-700 font-bold">
+                <TableRow className="border-t-2 border-pink-200 font-bold">
                   <TableCell>TOTAL</TableCell>
                   <TableCell className="text-right">{formatFC(totals.boissonsBrut)}</TableCell>
                   <TableCell className="text-right">{formatFC(totals.boissonsCommission)}</TableCell>
@@ -347,9 +347,9 @@ export default function RapportsPage() {
 
 function RptStat({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className={`rounded-lg border p-3 ${highlight ? 'border-emerald-800 bg-emerald-950/30' : 'bg-slate-900 border-slate-800'}`}>
-      <p className="text-xs text-slate-400">{label}</p>
-      <p className={`mt-1 text-lg font-bold ${highlight ? 'text-emerald-400' : 'text-white'}`}>{value}</p>
+    <div className={`rounded-lg border p-3 ${highlight ? 'border-emerald-200 bg-emerald-50' : 'bg-white border border-pink-100'}`}>
+      <p className="text-xs text-slate-500">{label}</p>
+      <p className={`mt-1 text-lg font-bold ${highlight ? 'text-emerald-600' : 'text-slate-800'}`}>{value}</p>
     </div>
   );
 }

@@ -83,7 +83,7 @@ export default function CremesPage() {
   if (loading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-rose-500" />
       </div>
     );
   }
@@ -92,15 +92,15 @@ export default function CremesPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Gestion des crèmes</h1>
-          <p className="text-sm text-slate-400">Commission de 20 % du chiffre d'affaires · Nourriture 2 000 FC par défaut.</p>
+          <h1 className="text-2xl font-bold text-slate-800">Gestion des crèmes</h1>
+          <p className="text-sm text-slate-500">Commission de 20 % du chiffre d'affaires · Nourriture 2 000 FC par défaut.</p>
         </div>
         <div className="flex items-center gap-3">
           <Input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full sm:w-44 bg-slate-900 border-slate-700 text-white"
+            className="w-full sm:w-44 bg-white border-pink-300 text-slate-800"
           />
           <SaleFormDialog date={date} onSave={saveSale} />
         </div>
@@ -131,8 +131,8 @@ export default function CremesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Sparkles className="h-5 w-5 text-emerald-400" />
+          <CardTitle className="flex items-center gap-2 text-slate-800">
+            <Sparkles className="h-5 w-5 text-rose-600" />
             Journal du {formatDateFR(date)}
           </CardTitle>
           <CardDescription>
@@ -163,10 +163,10 @@ export default function CremesPage() {
                   <TableCell className="text-right">{formatFC(s.food_allowance)}</TableCell>
                   <TableCell className="text-right">{formatFC(s.expected_amount)}</TableCell>
                   <TableCell className="text-right">{formatFC(s.paid_amount)}</TableCell>
-                  <TableCell className={`text-right ${Number(s.difference) < 0 ? 'text-red-400' : Number(s.difference) > 0 ? 'text-emerald-400' : 'text-slate-300'}`}>
+                  <TableCell className={`text-right ${Number(s.difference) < 0 ? 'text-red-600' : Number(s.difference) > 0 ? 'text-emerald-600' : 'text-slate-500'}`}>
                     {formatFC(s.difference)}
                   </TableCell>
-                  <TableCell className="max-w-48 truncate text-slate-400">{s.notes || '—'}</TableCell>
+                  <TableCell className="max-w-48 truncate text-slate-500">{s.notes || '—'}</TableCell>
                   <TableCell className="text-right">
                     <SaleFormDialog date={date} sale={s} onSave={saveSale} />
                   </TableCell>
@@ -190,17 +190,17 @@ export default function CremesPage() {
 function SummaryTile({ label, value, highlight }: { label: string; value: string; highlight?: 'warning' | 'success' | 'info' }) {
   const cls =
     highlight === 'warning'
-      ? 'border-amber-900 bg-amber-950/30'
+      ? 'border-amber-200 bg-amber-50'
       : highlight === 'success'
-      ? 'border-emerald-900 bg-emerald-950/30'
+      ? 'border-emerald-200 bg-emerald-50'
       : highlight === 'info'
-      ? 'border-sky-900 bg-sky-950/30'
+      ? 'border-sky-200 bg-sky-50'
       : '';
   return (
     <Card className={cls}>
       <CardContent className="pt-6">
-        <p className="text-xs text-slate-400 uppercase tracking-wide">{label}</p>
-        <p className="mt-1 text-xl font-bold text-white">{value}</p>
+        <p className="text-xs text-slate-500 uppercase tracking-wide">{label}</p>
+        <p className="mt-1 text-xl font-bold text-slate-800">{value}</p>
       </CardContent>
     </Card>
   );
@@ -249,13 +249,13 @@ function SaleFormDialog({
             <Pencil className="h-4 w-4" />
           </Button>
         ) : (
-          <Button className="bg-emerald-600 hover:bg-emerald-500">
+          <Button className="bg-rose-600 hover:bg-rose-500">
             <Plus className="h-4 w-4 mr-1" />
             Nouvelle journée
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-md">
+      <DialogContent className="bg-white border-pink-300 text-slate-800 max-w-md">
         <DialogHeader>
           <DialogTitle>{sale ? 'Modifier la journée' : 'Nouvelle journée de vente'}</DialogTitle>
         </DialogHeader>
@@ -263,53 +263,53 @@ function SaleFormDialog({
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label>Date</Label>
-              <Input type="date" value={saleDate} onChange={(e) => setSaleDate(e.target.value)} className="bg-slate-950 border-slate-700" />
+              <Input type="date" value={saleDate} onChange={(e) => setSaleDate(e.target.value)} className="bg-pink-50 border-pink-200" />
             </div>
             <div className="space-y-1.5">
               <Label>Vendeur / Vendeuse</Label>
-              <Input value={sellerName} onChange={(e) => setSellerName(e.target.value)} placeholder="Nom" className="bg-slate-950 border-slate-700" />
+              <Input value={sellerName} onChange={(e) => setSellerName(e.target.value)} placeholder="Nom" className="bg-pink-50 border-pink-200" />
             </div>
           </div>
           <div className="space-y-1.5">
             <Label>Montant total des ventes (FC)</Label>
-            <Input type="number" min="0" value={totalSales} onChange={(e) => setTotalSales(e.target.value)} className="bg-slate-950 border-slate-700" />
+            <Input type="number" min="0" value={totalSales} onChange={(e) => setTotalSales(e.target.value)} className="bg-pink-50 border-pink-200" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label>Nourriture remise le matin (FC)</Label>
-              <Input type="number" min="0" value={food} onChange={(e) => setFood(e.target.value)} className="bg-slate-950 border-slate-700" />
+              <Input type="number" min="0" value={food} onChange={(e) => setFood(e.target.value)} className="bg-pink-50 border-pink-200" />
             </div>
             <div className="space-y-1.5">
               <Label>Montant versé en fin de journée (FC)</Label>
-              <Input type="number" min="0" value={paid} onChange={(e) => setPaid(e.target.value)} className="bg-slate-950 border-slate-700" />
+              <Input type="number" min="0" value={paid} onChange={(e) => setPaid(e.target.value)} className="bg-pink-50 border-pink-200" />
             </div>
           </div>
           <div className="space-y-1.5">
             <Label>Observations (facultatif)</Label>
-            <Input value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Remarque…" className="bg-slate-950 border-slate-700" />
+            <Input value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Remarque…" className="bg-pink-50 border-pink-200" />
           </div>
 
-          <div className="rounded-md bg-slate-950 border border-slate-800 p-3 text-sm space-y-1">
+          <div className="rounded-md bg-pink-50 border border-pink-100 p-3 text-sm space-y-1">
             <div className="flex justify-between">
-              <span className="text-slate-400">Commission (20 %)</span>
+              <span className="text-slate-500">Commission (20 %)</span>
               <span className="font-medium">{formatFC(commission)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Nourriture</span>
+              <span className="text-slate-500">Nourriture</span>
               <span className="font-medium">{formatFC(foodNum)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Solde attendu (ventes − commission − nourriture)</span>
-              <span className="font-medium text-emerald-400">{formatFC(expected)}</span>
+              <span className="text-slate-500">Solde attendu (ventes − commission − nourriture)</span>
+              <span className="font-medium text-emerald-600">{formatFC(expected)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Écart (versé − attendu)</span>
-              <span className={`font-medium ${paidNum - expected < 0 ? 'text-red-400' : ''}`}>{formatFC(paidNum - expected)}</span>
+              <span className="text-slate-500">Écart (versé − attendu)</span>
+              <span className={`font-medium ${paidNum - expected < 0 ? 'text-red-600' : ''}`}>{formatFC(paidNum - expected)}</span>
             </div>
           </div>
 
           <Button
-            className="w-full bg-emerald-600 hover:bg-emerald-500"
+            className="w-full bg-rose-600 hover:bg-rose-500"
             disabled={!sellerName || !totalSales}
             onClick={async () => {
               const ok = await onSave({

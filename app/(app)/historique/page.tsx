@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Loader2, History as HistoryIcon } from 'lucide-react';
+import { Loader as Loader2, History as HistoryIcon } from 'lucide-react';
 
 type Counting = {
   id: string;
@@ -123,7 +123,7 @@ export default function HistoriquePage() {
   if (loading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-rose-500" />
       </div>
     );
   }
@@ -132,13 +132,13 @@ export default function HistoriquePage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Historique</h1>
-          <p className="text-sm text-slate-400">Toutes les opérations sont conservées. Filtrez par période pour comparer les journées.</p>
+          <h1 className="text-2xl font-bold text-slate-800">Historique</h1>
+          <p className="text-sm text-slate-500">Toutes les opérations sont conservées. Filtrez par période pour comparer les journées.</p>
         </div>
         <div className="flex items-center gap-2">
-          <Input type="date" value={start} onChange={(e) => setStart(e.target.value)} className="w-40 bg-slate-900 border-slate-700 text-white" />
+          <Input type="date" value={start} onChange={(e) => setStart(e.target.value)} className="w-40 bg-white border-pink-300 text-slate-800" />
           <span className="text-slate-500 text-sm">au</span>
-          <Input type="date" value={end} onChange={(e) => setEnd(e.target.value)} className="w-40 bg-slate-900 border-slate-700 text-white" />
+          <Input type="date" value={end} onChange={(e) => setEnd(e.target.value)} className="w-40 bg-white border-pink-300 text-slate-800" />
         </div>
       </div>
 
@@ -153,8 +153,8 @@ export default function HistoriquePage() {
         <TabsContent value="comparaison">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white">
-                <HistoryIcon className="h-5 w-5 text-emerald-400" />
+              <CardTitle className="flex items-center gap-2 text-slate-800">
+                <HistoryIcon className="h-5 w-5 text-rose-600" />
                 Journée par journée
               </CardTitle>
               <CardDescription>Montants attendus et versés pour chaque activité.</CardDescription>
@@ -183,7 +183,7 @@ export default function HistoriquePage() {
                         <TableCell className="text-right">{formatFC(g.cremesVentes)}</TableCell>
                         <TableCell className="text-right">{formatFC(g.cremesAttendu)}</TableCell>
                         <TableCell className="text-right">{formatFC(g.cremesVersee)}</TableCell>
-                        <TableCell className={`text-right ${ecart < 0 ? 'text-red-400' : ecart > 0 ? 'text-emerald-400' : 'text-slate-300'}`}>
+                        <TableCell className={`text-right ${ecart < 0 ? 'text-red-600' : ecart > 0 ? 'text-emerald-600' : 'text-slate-500'}`}>
                           {formatFC(ecart)}
                         </TableCell>
                       </TableRow>
@@ -306,7 +306,7 @@ export default function HistoriquePage() {
                       <TableCell className="text-right">{formatFC(s.food_allowance)}</TableCell>
                       <TableCell className="text-right">{formatFC(s.expected_amount)}</TableCell>
                       <TableCell className="text-right">{formatFC(s.paid_amount)}</TableCell>
-                      <TableCell className="text-slate-400">{s.notes || '—'}</TableCell>
+                      <TableCell className="text-slate-500">{s.notes || '—'}</TableCell>
                     </TableRow>
                   ))}
                   {creamSales.length === 0 && (

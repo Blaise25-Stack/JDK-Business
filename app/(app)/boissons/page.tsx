@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Plus, Trash2, Loader2, TriangleAlert, Package, ShoppingCart } from 'lucide-react';
+import { Plus, Trash2, Loader as Loader2, TriangleAlert, Package, ShoppingCart } from 'lucide-react';
 
 type Drink = { id: string; name: string };
 type Purchase = {
@@ -571,7 +571,7 @@ function PurchaseForm({
               <select
                 value={drinkId}
                 onChange={(e) => setDrinkId(e.target.value)}
-                className="w-full rounded-md bg-slate-950 border border-slate-700 px-3 py-2 text-sm"
+                className="w-full rounded-md bg-pink-50 border border-pink-200 px-3 py-2 text-sm"
               >
                 <option value="">Choisir une boisson</option>
                 {drinks.map((d) => (
